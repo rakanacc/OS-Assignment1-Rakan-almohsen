@@ -164,7 +164,8 @@ public void updateWaitingTime() {
 }
 
 public class SchedulerSimulation {
-    public static void main(String[] args) {
+    static int contextSwitches = 0;
+ public static void main(String[] args) {
         // ⚠️ IMPORTANT: Put your student ID here to seed the random number generator
         // This makes your output unique to you - DO NOT forget to change this!
         int studentID = 443050277;  // ← CHANGE THIS TO YOUR ACTUAL STUDENT ID
@@ -255,7 +256,12 @@ public class SchedulerSimulation {
             }
             System.out.println(Colors.BRIGHT_WHITE + "]" + Colors.RESET);
             System.out.println(Colors.BOLD + Colors.MAGENTA + "└" + "─".repeat(79) + Colors.RESET + "\n");
-            
+
+            Process process = processMap.get(thread);
+
+            process.updateWaitingTime();
+
+            contextSwitches++;
             // Start the thread, which will run the process for one time quantum
             currentThread.start();
             
@@ -284,6 +290,16 @@ public class SchedulerSimulation {
                 }
             }
         }
+  System.out.println("\n=== Summary ===");
+  System.out.println("Process\tBurst\tWaiting");
+
+  for (Process p : processMap.values()) {
+    System.out.println(p.getName() + "\t" + 
+        p.getBurstTime() + "\t" + 
+        p.getWaitingTime());
+}
+
+System.out.println("Total context switches: " + contextSwitches);
         
         // End of the scheduler simulation
         System.out.println(Colors.BOLD + Colors.BRIGHT_GREEN + 
