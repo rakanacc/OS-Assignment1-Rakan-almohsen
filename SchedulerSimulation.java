@@ -147,6 +147,14 @@ class Process implements Runnable {
     public boolean isFinished() {
         return remainingTime <= 0;
     }
+
+    public int getPriority() {
+    return priority;
+    }
+
+public long getWaitingTime() {
+    return waitingTime;
+    }
 }
 
 public class SchedulerSimulation {
