@@ -157,6 +157,12 @@ public long getWaitingTime() {
     }
 }
 
+public void updateWaitingTime() {
+    long now = System.currentTimeMillis();
+    waitingTime += (now - creationTime);
+    creationTime = now;
+}
+
 public class SchedulerSimulation {
     public static void main(String[] args) {
         // ⚠️ IMPORTANT: Put your student ID here to seed the random number generator
