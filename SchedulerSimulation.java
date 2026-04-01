@@ -152,7 +152,7 @@ class Process implements Runnable {
     return priority;
     }
 
-public long getWaitingTime() {
+    public long getWaitingTime() {
     return waitingTime;
     }
 }
